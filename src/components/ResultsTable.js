@@ -13,8 +13,8 @@ function ResultsTable(props) {
           </tr>
         </thead>
         <tbody>
-          {[...props.results].map((result) => (
-            <tr key={result.id}>
+          {props.results.map((result, key) => (
+            <tr key={key}>
               <th scope="row"><img alt={result.name.first} className="img-fluid" src={result.picture.thumbnail} /></th>
               <td>{`${result.name.first} ${result.name.last}`}</td>
               <td>{result.phone}</td>

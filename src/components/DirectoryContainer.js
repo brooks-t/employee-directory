@@ -13,14 +13,20 @@ class DirectoryContainer extends Component {
     };
 
     componentDidMount() {
-        this.searchEmployees("");
+        this.displayAll();
       }
+    
+    searchEmployees = (employee) => {
+        console.log(employee);
+        const foundEmployee = this.state.results.filter(r => r.name.first.startsWith(employee));
+        this.setState({results: foundEmployee});
+        console.log(foundEmployee);
+    }
 
-    searchEmployees = () => {
+    displayAll = () => {
         API.search()
           .then((res) => {
               this.setState({ results: res.data.results });
-              console.log(res.data);
           }
         )
         .catch(err => console.log(err));

@@ -58,7 +58,6 @@ class DirectoryContainer extends Component {
     
     handleSort = event => {
         event.preventDefault();
-        console.log("I done been clicked!");
         this.sortEmployees();
     }
 

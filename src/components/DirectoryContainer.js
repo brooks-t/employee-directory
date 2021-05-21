@@ -6,6 +6,12 @@ import SearchForm from "./SearchForm";
 import ResultsTable from "./ResultsTable";
 import API from "../utils/API";
 
+const styles = {
+    sort: {
+        marginTop: 20
+    }
+};
+
 class DirectoryContainer extends Component {
     state = {
       results: [],
@@ -45,13 +51,24 @@ class DirectoryContainer extends Component {
         this.searchEmployees(this.state.search);
     };
 
+    sortEmployees = () => {
+        const sortedEmployees = this.state.results.sort((a, b) => a.name.first > b.name.first ? 1: -1);
+        this.setState({results: sortedEmployees});
+    }
+    
+    handleSort = event => {
+        event.preventDefault();
+        console.log("I done been clicked!");
+        this.sortEmployees();
+    }
+
     render() {
         return(
             <Container>
                 <Row>
                     <Col size="md-12">
                         <h1>Employee Directory</h1>
-                        <p>Click on carrots to filter by heading or use the search box to narrow your results.</p>
+                        <p>Search by name or sort by name.</p>
                     </Col>
                 </Row>
                 <Row>
@@ -61,6 +78,9 @@ class DirectoryContainer extends Component {
                             handleInputChange={this.handleInputChange}
                             handleFormSubmit={this.handleFormSubmit}
                         />
+                        <button type="button" onClick={this.handleSort} className="btn btn-dark sort" style={styles.sort}>
+                        Sort Names A-Z
+                        </button>
                     </Col>
                 </Row>
                 <Row>
